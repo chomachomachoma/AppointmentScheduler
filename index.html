@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+	<head>		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Schedule an Appointment</title>
+		<link type="text/css" rel="stylesheet" href="css/sidebarScheduler.css" />		
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
+		<script type="text/javascript" src="js/date.pack.js"></script>
+		<script type="text/javascript" src="js/jquery.datePicker.pack.js"></script>
+		<script type="text/javascript" src="js/jquery.metadata.pack.js"></script>
+		<script type="text/javascript" src="js/jquery.validate.pack.js"></script>
+		<script type="text/javascript">
+			Date.firstDayOfWeek = 0;
+			Date.format = 'mm/dd/yyyy';
+			$(function()
+				{
+					$('.date-pick').datePicker();
+				});
+				
+			$().ready(function() {
+				var containerb = $('div.container');		
+				var validator = $("#scheduleinfo").validate({
+					errorContainer: containerb,
+					errorLabelContainer: $("ol", containerb),
+					wrapper: 'li',
+					meta: "validate"
+				});			
+				$(".cancel").click(function() {
+					validator.resetForm();
+				});
+			});
+ 	
+			function disableEnterKey(e)
+			{
+					 var key;		 
+					 if(window.event)
+								key = window.event.keyCode; //IE
+					 else
+								key = e.which; //firefox		 
+					 return (key != 13);
+			}		
+						
+			function checkEnter(e)
+			{
+					var Ucode=e.keyCode? e.keyCode : e.charCode
+					if (Ucode == 13)
+					{
+							requestStoreInfo();
+					}
+			}
+			 	
+			var url = "getStore.php?id=";			
+			function handleHttpResponse() {	 
+				if (http.readyState == 4) {
+					if(http.status==200) {
+					var results=http.responseText;
+					document.getElementById('storeInfo').innerHTML = results;
+					}
+				}
+			}
+						 
+			function requestStoreInfo() {		 
+					var sId = document.getElementById("ZipEntered").value;
+					http.open("GET", url + escape(sId), true);
+					http.onreadystatechange = handleHttpResponse;
+					http.send(null);
+			}
+					
+			function getHTTPObject() {
+				var xmlhttp;
+			
+				if(window.XMLHttpRequest){
+					xmlhttp = new XMLHttpRequest();
+				}
+				else if (window.ActiveXObject){
+					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					if (!xmlhttp){
+							xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");
+					}				 
+			}
+				return xmlhttp;
+			}
+			var http = getHTTPObject(); // We create the HTTP Object			
+			</script>
+		<!--[if IE]>
+			<script type="text/javascript" src="js/jquery.bgiframe.pack.js"></script>
+			<style>
+				a#go {
+					float:right;
+					margin:0 65px 0 0;
+				}
+			</style>
+		<![endif]-->		
+	</head>
+	<body>
+		<div id="schedule_service_module">
+			<form id="scheduleinfo" method="post" action="makeAppointment.php" onkeydown="return disableEnterKey(event);">			
+				<table class="schedule_service_table" cellpadding="0" cellspacing="0">
+					<tr>
+						<td colspan="2" class="Zip">
+							Zip Code:&nbsp;&nbsp;
+							<input type="text" name="ZipEntered" size="8" id="ZipEntered" class="{validate:{required:true,number:true, rangelength:[5,6]}}" value="" onkeydown="checkEnter(event);" />
+							<a id="go" value="" onclick="requestStoreInfo();" /></a>
+						</td>
+					</tr>
+				</table>											
+				<div id="storeInfo"></div>
+				<table class="schedule_service_table" cellpadding="0" cellspacing="0">
+					<tr>
+						<td>
+							Service Date:<br />
+							<input type="text" name="Date" size="8" id="Date" class="date-pick {validate:{required:true, rangelength:[10,10]}}" value="" />
+						</td>
+						<td>
+							Service Time:<br />
+							<select name="Time" class="time {validate:{required:true}}">
+								<option></option>
+								<option value="Morning">Morning</option>
+								<option value="Afternoon">Afternoon</option>
+								<option value="Evening">Evening</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							Service Requested:<br />
+							<select name="Service" class="inputlong {validate:{required:true}}">
+								<option></option>
+								<option value="Service A">Service A</option>
+								<option value="Service B">Service B</option>
+								<option value="Service C">Service C</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input type="radio" name="OSEstimate" class="{validate:{required:true}}" value="Estimate Only" /> On-Site Estimate [?]<br />
+							<input type="radio" name="OSEstimate" class="{validate:{required:true}}" value="Estimate and Services" /> On-Site Estimate and Perform Services [?]
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							Additional Notes or Special Service Request:<br />
+							<textarea name="Notes" rows="5" class="inputlong" value=""></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							Have you used Coit Service before?<br />
+							<input type="radio" name="PrevCust" class="{validate:{required:true}}" value="Yes" />&nbsp;Yes&nbsp;&nbsp;&nbsp;
+							<input type="radio" name="PrevCust" class="{validate:{required:true}}" value="No" />&nbsp;No
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							How did you hear about us?<br />
+							<select name="Ref" class="inputlong {validate:{required:true}}">
+								<option></option>
+								<option value="Reference 1">Reference 1</option>
+								<option value="Reference 2">Reference 2</option>
+								<option value="Reference 3">Reference 3</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							Promo Code:<br />
+							<input type="text" name="Promo" class="inputlong" value="" />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input type="image" id="submit" value="Submit" src="images/bt_submit-or.gif" align="right" />
+						</td>
+					</tr>
+				</table>
+			</form>			
+			<!-- error container -->			
+			<div class="container">
+				<h4>There are errors in your form submission, please see below for details.</h4>
+				<ol>				
+					<li><label for="StoreID" class="error"><strong>There are no stores to serve the location entered.</strong></label></li>
+					<li><label for="ZipEntered" class="error">Please enter a valid <strong>Zip Code</strong></label></li>
+					<li><label for="Date" class="error">Please enter a <strong>Service Date</strong></label></li>
+					<li><label for="Time" class="error">Please select a <strong>Service Time</strong></label></li>
+					<li><label for="Service" class="error">Please select a <strong>Service Request</strong></label></li>
+					<li><label for="OSEstimate" class="error">Please select an <strong>On-Site Estimate Preference</strong></label></li>
+					<li><label for="PrevCust" class="error">Please indicate if you have <strong>Used Coit Service Before</strong></label></li>
+					<li><label for="Ref" class="error">Please indicate how you <strong>Heard About Us</strong></label></li>
+				</ol>
+			</div>
+		</div>
+		<div class="zips">
+			For demo purposes, you may enter any of the following zip codes:<br />
+			<ul>
+				<li>91110 - Los Angeles</li>
+				<li>92220 - San Diego</li>
+				<li>93330 - San Francisco</li>
+			</ul>
+		</div>
+	</body>
+</html>

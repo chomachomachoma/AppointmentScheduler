@@ -1,0 +1,266 @@
+#schedule_service_module {
+	width: 260px;
+	background: #ffc300;
+	padding: 20px;
+	font-family: arial, sans-serif;
+	font-size: 12px;
+}
+
+table.schedule_service_table {
+	width: 100%;
+}
+
+table.schedule_service_table td {
+	line-height: 16px;
+	padding: 5px 0;
+	vertical-align: baseline;
+}
+
+table.schedule_service_table input {
+	border: 0 !important;
+	padding: 2px;
+}
+
+a#go {
+	width: 46px;
+	height: 22px;
+	background: #ffc300 url(../images/go_arrow.gif) no-repeat 0 2px;
+	margin: 0 65px 0 10px;
+	display:block;
+	float:right;
+}
+/*Stupid Webkit*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+
+	a#go {
+		margin: -22px 55px 0 10px;
+	}
+
+}
+input#Date {
+	float: left;
+}
+
+a#go:hover {
+	cursor: pointer;
+}
+
+td.zip {
+	font-size: 14px;
+}
+
+.inputlong {
+	width: 252px;
+}
+
+select.time {
+	width: 136px;
+}
+
+.cmxform fieldset p.error label {
+	color: #f00;
+}
+
+.container, .containerb {
+	background-color: #eee;
+	border: 1px solid #f00;
+	margin: 5px;
+	padding: 5px;
+}
+
+.container ol li, .containerb ol li {
+	list-style-type: disc;
+	margin-left: -10px;
+}
+
+.container, .containerb {
+	display: none
+}
+
+.container label.error, .containerb label.error {
+	display: inline;
+}
+
+form.cmxform {
+	width: 100%;
+}
+
+form.cmxform label.error {
+	display: block;
+	margin-left: 5px;
+	width: auto;
+}
+
+table.jCalendar {
+	border: 1px solid #000;
+	background: #aaa;
+	border-collapse: separate;
+	border-spacing: 2px;
+}
+
+table.jCalendar th {
+	background: #333;
+	color: #fff;
+	font-weight: bold;
+	padding: 3px 5px;
+}
+
+table.jCalendar td {
+	background: #ccc;
+	color: #000;
+	padding: 3px 5px;
+	text-align: center;
+}
+
+table.jCalendar td.other-month {
+	background: #ddd;
+	color: #aaa;
+}
+
+table.jCalendar td.today {
+	background: #666;
+	color: #fff;
+}
+
+table.jCalendar td.selected {
+	background: #f66;
+	color: #fff;
+}
+
+table.jCalendar td.selected.dp-hover {
+	background: #f33;
+	color: #fff;
+}
+
+table.jCalendar td.dp-hover, table.jCalendar tr.activeWeekHover td {
+	background: #fff;
+	color: #000;
+}
+
+table.jCalendar tr.selectedWeek td {
+	background: #f66;
+	color: #fff;
+}
+
+table.jCalendar td.disabled, table.jCalendar td.disabled.dp-hover {
+	background: #bbb;
+	color: #888;
+}
+
+table.jCalendar td.unselectable, table.jCalendar td.unselectable:hover, table.jCalendar td.unselectable.dp-hover {
+	background: #bbb;
+	color: #888;
+}
+
+.dp-popup {
+	position: relative;
+	background: #ccc;
+	font-size: 10px;
+	font-family: arial, sans-serif;
+	padding: 2px;
+	width: 171px;
+	line-height: 1.2em;
+}
+
+#dp-popup {
+	position: absolute;
+	z-index: 199;
+}
+
+.dp-popup h2 {
+	font-size: 12px;
+	text-align: center;
+	margin: 2px 0;
+	padding: 0;
+}
+
+a#dp-close {
+	font-size: 11px;
+	padding: 4px 0;
+	text-align: center;
+	display: block;
+}
+
+a#dp-close:hover {
+	text-decoration: underline;
+}
+
+.dp-popup a {
+	color: #000;
+	text-decoration: none;
+	padding: 3px 2px 0;
+}
+
+.dp-popup .dp-nav-prev {
+	position: absolute;
+	top: 2px;
+	left: 4px;
+	width: 100px;
+}
+
+.dp-popup .dp-nav-prev a {
+	float: left;
+}
+
+.dp-popup .dp-nav-prev a, .dp-popup .dp-nav-next a {
+	cursor: pointer;
+}
+
+.dp-popup .dp-nav-prev a.disabled, .dp-popup .dp-nav-next a.disabled {
+	cursor: default;
+}
+
+.dp-popup .dp-nav-next {
+	position: absolute;
+	top: 2px;
+	right: 4px;
+	width: 100px;
+}
+
+.dp-popup .dp-nav-next a {
+	float: right;
+}
+
+.dp-popup a.disabled {
+	cursor: default;
+	color: #aaa;
+}
+
+.dp-popup td {
+	cursor: pointer;
+}
+
+.dp-popup td.disabled {
+	cursor: default;
+}
+
+a.dp-choose-date {
+	float: left;
+	width: 20px;
+	height: 20px;
+	padding: 0;
+	margin: 0 15px 0 0;
+	display: block;
+	text-indent: -2000px;
+	overflow: hidden;
+	background: #FFF url(../images/calendar_icon.gif) no-repeat;
+}
+
+a.dp-choose-date.dp-disabled {
+	background-position: 0 -20px;
+	cursor: default;
+}
+#storeInfo {
+	background:#FFF;
+	padding:0 8px;
+	font-weight:bold;
+}
+/*Stupid Webkit*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+
+	input#Date {
+		float: left;
+		margin:0 0 0 -2px;
+	}
+
+}
